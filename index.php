@@ -28,11 +28,13 @@ Keitimui naudokite pirmo uždavinio funkciją ir preg_replace_callback(); -->
 <?php
 // Generate Random Hexadecimal String
 $randomString = substr(md5(time()), 0, 16);
-echo "<h1 style='color:coral';>$randomString</h1>";
+echo "<h4 style='color:coral';>$randomString</h4>";
 $pattern = '/[0-9]+/';
 
 function headerPrint($text) {
-    return "<h1> $text[0] </h1>";
+    foreach($text as $index => $_) {
+        return "<h1> $text[$index] </h1>";
+    }
 }
 
 function stringas($matches) {
@@ -40,4 +42,22 @@ function stringas($matches) {
 }
 $result = preg_replace_callback($pattern, "stringas", $randomString);
 echo $result;
+?>
+
+
+<!-- **** kitoks 3uzd. sprenimas **** -->
+<?php
+echo '<br> kitoks sprendimas: <br>';
+$kodas = md5(time());
+
+function h1($text) {
+    if(is_array($text)) {
+        $text = $text[0];
+    }
+    return '<h1 style="display: inline">' .$text. '</h1>';
+}
+_d($kodas);
+
+$result2 = preg_replace_callback('/\d+/', 'h1' , $kodas);                     //ka ieskom, kaip, kur
+echo $result2;
 ?>
